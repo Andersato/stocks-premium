@@ -1,0 +1,6 @@
+vendor/
+.idea
+.env.local
+etc/docker/mysql/*
+/var/cache
+/var/log

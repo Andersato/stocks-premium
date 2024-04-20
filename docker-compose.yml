@@ -1,0 +1,57 @@
+version: '3'
+services:
+  php:
+    container_name: finviz-php
+    user: "${USER_ID}:${GROUP_ID}"
+    build:
+      context: ./
+      args:
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
+        XDEBUG_CLIENT_HOST: ${XDEBUG_CLIENT_HOST}
+        XDEBUG_CLIENT_PORT: ${XDEBUG_CLIENT_PORT}
+        XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY}
+      dockerfile: ./etc/docker/Dockerfile
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    working_dir: /var/www/html
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - ./:/var/www/html/
+      - ./etc/docker/php/conf:/etc/apache2/sites-available/
+      - ~/.ssh:/root/.ssh
+    ports:
+      - 8001:80
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: finviz-mysql
+    image: mysql
+    volumes:
+    - ./etc/docker/mysql:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=finviz
+    ports:
+    - 3308:3306
+
+  rabbitmq:
+    container_name: finviz-rabbitmq
+    image: rabbitmq:3.7-management
+    ports: [ 5672, 15672 ]
+
+#  mail:
+#    platform: linux/amd64
+#    container_name: blackpadel-mail
+#    image: mailhog/mailhog
+#    ports:
+#      - "8026:8025"
+#      - "1026:1025"
+#    restart: always
