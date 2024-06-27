@@ -30,4 +30,35 @@ class StockRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findSectors(): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->select('DISTINCT(s.sector) as sector')
+            ->where('s.sector IS NOT NULL')
+            ->orderBy('s.sector', 'ASC');
+
+        return $qb->getQuery()->getScalarResult();
+    }
+
+    public function findTickersToAutocomplete(string $value): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->select('s.ticker, s.name')
+            ->where('s.ticker LIKE :ticker')
+            ->setParameter('ticker', $value.'%')
+            ->setMaxResults(15)
+            ->orderBy('s.ticker', 'ASC');
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function findTickersByStatistics(): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->select('s.ticker')
+            ->getQuery();
+
+        return $qb->getArrayResult();
+    }
 }

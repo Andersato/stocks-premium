@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'show' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('metrics') }}
+{% endblock %}
+
+{% block body %}
+    <div class="ticker" data-ticker="{{ informationStock.stock.ticker }}"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                {% include 'show/includes/profile.html.twig' with {informationStock: informationStock} %}
+                {% include 'show/includes/income_statement.html.twig' with {informationStock: informationStock} %}
+                {% include 'show/includes/profitability.html.twig' with {informationStock: informationStock} %}
+                {% include 'show/includes/valuation.html.twig' with {informationStock: informationStock} %}
+                {% include 'show/includes/financial_health.html.twig' with {informationStock: informationStock} %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h1>{{ 'titles.graphics'|trans }}</h1>
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="tabChartPriceVolume-tab" data-bs-toggle="tab" data-bs-target="#tabChartPriceVolume" type="button" role="tab" aria-controls="tabChartPriceVolume" aria-selected="true">
+                        {{ 'titles.tabs.priceAndVolume'|trans }}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tabChartInstOwn-tab" data-bs-toggle="tab" data-bs-target="#tabChartInstOwn" type="button" role="tab" aria-controls="tabChartInstOwn" aria-selected="false">
+                        {{ 'titles.tabs.institutionalOwn'|trans }}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tabChartVolume-tab" data-bs-toggle="tab" data-bs-target="#tabChartVolume" type="button" role="tab" aria-controls="tabChartVolume" aria-selected="false">
+                        {{ 'titles.tabs.volume'|trans }}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tabChartPrice-tab" data-bs-toggle="tab" data-bs-target="#tabChartPrice" type="button" role="tab" aria-controls="tabChartPrice" aria-selected="false">
+                        {{ 'titles.tabs.price'|trans }}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tabChartShortFloat-tab" data-bs-toggle="tab" data-bs-target="#tabChartShortFloat" type="button" role="tab" aria-controls="tabChartShortFloat" aria-selected="false">
+                        {{ 'titles.tabs.shortFloat'|trans }}
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="tabs">
+                <div class="tab-pane fade show active" id="tabChartPriceVolume" role="tabpanel" aria-labelledby="tabChartPriceVolume-tab">
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div id="chartPriceVolume" style="height: 500px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabChartInstOwn" role="tabpanel" aria-labelledby="tabChartInstOwn-tab">
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div id="chartInstOwn" style="height: 370px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabChartVolume" role="tabpanel" aria-labelledby="tabChartVolume-tab">
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div id="chartVolume" style="height: 370px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabChartPrice" role="tabpanel" aria-labelledby="tabChartPrice-tab">
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div id="chartPrice" style="height: 370px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabChartShortFloat" role="tabpanel" aria-labelledby="tabChartShortFloat-tab">
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div id="chartShortFloat" style="height: 370px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -21,6 +21,9 @@ class InformationItem
     #[ORM\Column(length: 20)]
     private ?string $type = null;
 
+    #[ORM\Column(length: 40)]
+    private ?string $attributeName = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,5 +47,15 @@ class InformationItem
     public function setType(string $type): void
     {
         $this->type = $type;
+    }
+
+    public function getAttributeName(): ?string
+    {
+        return $this->attributeName;
+    }
+
+    public function setAttributeName(?string $attributeName): void
+    {
+        $this->attributeName = $attributeName;
     }
 }

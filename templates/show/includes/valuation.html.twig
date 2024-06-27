@@ -1,0 +1,35 @@
+{% trans_default_domain 'show' %}
+
+<div class="col-md-2">
+    <h2>{{ 'titles.valuation'|trans }}</h2>
+    <div class="table-responsive">
+            <table class="table table-dark table-borderless table-sm">
+                <tbody>
+                <tr>
+                    <td class="table-dark">{{ 'table.per'|trans }}</td>
+                    <td class="table-success">{{ informationStock.per }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark">{{ 'table.forwardPer'|trans }}</td>
+                    <td class="table-success">{{ informationStock.forwardPer }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark">{{ 'table.peg'|trans }}</td>
+                    <td class="table-success">{{ informationStock.peg }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark">{{ 'table.priceSales'|trans }}</td>
+                    <td class="table-success">{{ informationStock.priceSales }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark">{{ 'table.priceBook'|trans }}</td>
+                    <td class="table-success">{{ informationStock.priceBook }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark">{{ 'table.priceFCF'|trans }}</td>
+                    <td class="table-success">{{ informationStock.priceFreeCashFlow }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+</div>

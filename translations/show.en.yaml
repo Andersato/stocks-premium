@@ -1,0 +1,49 @@
+titles:
+  profile: Profile
+  incomeStatement: Income Statement
+  marketData: Market Data
+  valuation: Valuation
+  financialHealth: Financial Health
+  profitability: Profitability
+  growth: Growth Ratios
+  graphics: Graphics
+  tabs:
+    priceAndVolume: Price And Volume
+    institutionalOwn: Institutional Own
+    volume: Volume
+    price: Price
+    shortFloat: Short float
+table:
+  name: Name
+  sector: Sector
+  industry: Industry
+  index: Index
+  marketCap: Market Cap
+  employees: Employees
+  beta: Beta
+  income: Income
+  sales: Sales
+  per: P/E
+  forwardPer: Forward P/E
+  peg: P/E to Growth
+  priceFCF: P/FCF
+  priceSales: P/S
+  priceBook: P/B
+  roa: ROA
+  roe: ROE
+  roi: ROI
+  eps: EPS (TTM)
+  salesPast5Year: Sales Past 5 Year
+  epsGrowth: EPS Growth Y/Y
+  epsQuarter: EPS Q/Q
+  salesGrowth: Sales Growth Y/Y
+  salesQuarter: Sales Q/Q
+  operatingMargin: Operating Margin
+  netMargin: Net Margin
+  grossMargin: Gross Margin
+  quickRatio: Quick Ratio
+  currentRatio: Current Ratio
+  bookValue: Book Value/Share
+  cashShare: Cash/Share
+  debtEquity: Debt/Equity
+  longTermDebt: LT Debt/Equity

@@ -2,11 +2,12 @@
 
 namespace App\Command;
 
+use App\Entity\InformationStock;
 use App\Entity\Stock;
 use App\Message\AddInformationStockMessage;
+use App\Message\AddStatisticsElasticsearchMessage;
+use App\Message\SendErrorEmailMessage;
 use Doctrine\ORM\EntityManagerInterface;
-use DOMDocument;
-use Goutte\Client;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -29,6 +30,7 @@ class ScrapingCreateTickersCommand extends Command
 
     private EntityManagerInterface $entityManager;
     private MessageBusInterface $bus;
+    private int $cont;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -37,18 +39,112 @@ class ScrapingCreateTickersCommand extends Command
     {
         $this->entityManager = $entityManager;
         $this->bus = $bus;
+        $this->cont = 0;
 
         parent::__construct();
     }
 
+    private function limitString(string $text, int $limit): string
+    {
+        $limit -= 3;
+        $explodeText = explode(' ', $text);
+        $cutText = mb_substr($text, 0, $limit, 'UTF-8');
+
+        //Special case
+        if (1 === count($explodeText) && str_contains($cutText, '.')) {
+            $explodeText = explode('.', $cutText);
+            return $explodeText[0].'...';
+        }
+
+        //Special case
+        if (strlen($text) <= $limit) {
+            if (str_contains($cutText, '.')) {
+                return str_replace('.', '', $cutText).'...';
+            } else {
+                return $cutText;
+            }
+        }
+
+        //Special case
+        $explodeCutText = explode(' ', $cutText);
+        if (1 === count($explodeCutText)) {
+            return str_replace('.', '', $cutText).'...';
+        }
+
+        $count = 0;
+        $incrementWords = [];
+        foreach ($explodeText as $word) {
+            $lengthWordAndSpace = strlen($word) + 1;
+            $incrementWords[] = $count + $lengthWordAndSpace;
+            $count += $lengthWordAndSpace;
+        }
+
+        $lengthKeys = count($incrementWords);
+        $searchText = false;
+        for ($i = 0; $i < $lengthKeys && !$searchText; $i++) {
+            if ($limit <= $incrementWords[$i]) {
+                $searchText = true;
+            }
+        }
+
+        return implode(' ', array_slice($explodeText, 0, $i - 1)).'...';
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->bus->dispatch(
-            new AddInformationStockMessage(
-                'A',
-                'dsfs'
-            )
-        );die;
+
+//        $this->bus->dispatch(
+//            new AddInformationStockMessage(
+//                'AUUD',
+//                'Auddia Inc',
+//                $this->cont
+//            )
+//        );die;
+
+//        $arrayTests = [
+//            [
+//                'value' => 'Design patterns were introduced to the software community in Design Patterns, by Erich Gamma, Richard Heleo. Design patterns were introduced to the software community in month.',
+//                'expected' => 'Design patterns were introduced to the software community in Design Patterns, by Erich Gamma,...',
+//            ],
+//            [
+//                'value' => 'Design patterns were introduced to the software community in Design Patterns by Erich Gamma Richard heleo Design patterns were introduced to the software community in Design Patterns by Erich Gamma Richard Heleo',
+//                'expected' => 'Design patterns were introduced to the software community in Design Patterns by Erich Gamma...',
+//            ],
+//            [
+//                'value' => 'kjdshfjkdlshfljksdhfjiweryhwjkelnrkmsdnfsdk.jfklñsdfñklsdjhfajñksdhfñkjad.shfñjkawehruiññjshdfjkash.dfkñjhasdfjkñdhsafjkñasdhf',
+//                'expected' => 'kjdshfjkdlshfljksdhfjiweryhwjkelnrkmsdnfsdk...',
+//            ],
+//            [
+//                'value' =>    'kjdshfjkdlshfljksdhfjiweryhwjkelnrkmsdnfsdkjfklñsdfñklsdjhfajñksdhfñkjadshfñjkawehruiññjshdfjkashdfkñjhasdfjkñdhsafjkñasdhf',
+//                'expected' => 'kjdshfjkdlshfljksdhfjiweryhwjkelnrkmsdnfsdkjfklñsdfñklsdjhfajñksdhfñkjadshfñjkawehruiññjshdfjkash...',
+//            ],
+//            [
+//                'value' => 'This is a sentence',
+//                'expected' => 'This is a sentence',
+//            ],
+//            [
+//                'value' => 'This is a sentence.',
+//                'expected' => 'This is a sentence...',
+//            ],
+//        ];
+//
+//
+//        foreach ($arrayTests as $test) {
+//            $result = $this->limitString($test['value'], 100);
+//            $output = "Expected: {$test['expected']}".PHP_EOL."Actual: {$result}";
+//            if ($result === $test['expected']) {
+//                $output = 'OK.';
+//            }
+//            echo $output.PHP_EOL;
+//        }
+//
+//die;
+//
+//
+//        dd(array_slice($explode, 0, $indexToCut));
+//
+//
+//        dd($keys, $count);
 
         $io = new SymfonyStyle($input, $output);
 
@@ -66,21 +162,25 @@ class ScrapingCreateTickersCommand extends Command
         $items = 1;
         do {
             $table = $crawler->filter('table.screener_table');
-            $table->each(function (Crawler $tbody) {
-                $tbody->children('tr')->each(function (Crawler $tr){
+            $table->each(function (Crawler $tbody) use ($output) {
+                $tbody->children('tr')->each(function (Crawler $tr) use ($output) {
                     $tdTicker = $tr->children('td')->eq(1);
                     $tdName = $tr->children('td')->eq(2);
                     $ticker = $tdTicker->filter('a')->text();
                     $name = $tdName->filter('a')->text();
+                    $this->cont++;
                     $this->bus->dispatch(
                         new AddInformationStockMessage(
                             $ticker,
-                            $name
+                            $name,
+                            $this->cont
                         )
                     );
+                    $output->writeln('<question>Se ha enviado a la cola el ticker '.$ticker.' en la posición '.$this->cont.'</question>');
                 });
             });
             unset($table);
+            sleep(2);
             $output->writeln('<info>Se han añadido las empresas de esta página');
 
             $items += $itemsPerPage;
@@ -88,7 +188,6 @@ class ScrapingCreateTickersCommand extends Command
             gc_collect_cycles();
             $crawler = $client->request('GET', self::URL_SCREENER."&v111&r=".$items);
         } while ($page <= $numPages);
-
 
         $io->success('Se han leido todos los datos correctamente.');
 

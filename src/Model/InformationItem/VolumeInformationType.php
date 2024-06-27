@@ -8,8 +8,12 @@ final class VolumeInformationType implements InformationTypeInterface
 {
     use InformationItemTrait;
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
+        if ('-' === $this->value) {
+            return null;
+        }
+
         $this->value = (float)str_replace(",", "", $this->value);
 
         return (string) $this->value;
@@ -17,6 +21,6 @@ final class VolumeInformationType implements InformationTypeInterface
 
     public function getType(): string
     {
-        return InformationItemConstants::VOLUME_TYPE;
+        return 'float';
     }
 }

@@ -8,13 +8,17 @@ final class RatioInformationType implements InformationTypeInterface
 {
     use InformationItemTrait;
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
+        if ('-' === $this->value) {
+            return null;
+        }
+
         return $this->value;
     }
 
     public function getType(): string
     {
-        return InformationItemConstants::RATIO_TYPE;
+        return 'float';
     }
 }

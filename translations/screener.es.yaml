@@ -1,0 +1,13 @@
+table:
+  ticker: Ticker
+  name: Nombre
+  sector: Sector
+  industry: Industria
+  marketCap: Cap bursátil (MM)
+  price: Precio
+search:
+  company: Empresa
+  fundamentals: Fundamentales
+  technical: Técnico
+  performance: Rendimiento
+  statistics: Estadísticas

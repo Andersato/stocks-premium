@@ -4,3 +4,10 @@ vendor/
 etc/docker/mysql/*
 /var/cache
 /var/log
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+etc/docker/elasticsearch/*

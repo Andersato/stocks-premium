@@ -13,8 +13,12 @@ final class QuantityInformationType implements InformationTypeInterface
     final public const THOUSANDS = 'K';
 
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
+        if ('-' === $this->value) {
+            return null;
+        }
+
         preg_match('/([\d.]+)([A-Z]?)/', $this->value, $matches);
 
         $number = $matches[1];
@@ -32,6 +36,6 @@ final class QuantityInformationType implements InformationTypeInterface
 
     public function getType(): string
     {
-        return InformationItemConstants::QUANTITY_TYPE;
+        return 'float';
     }
 }

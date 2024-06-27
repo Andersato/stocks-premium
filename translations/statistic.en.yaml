@@ -1,0 +1,28 @@
+form:
+  submit: Submit
+  sector: Sector
+  industry: Industry
+  price: Price
+  perfWeek: Last week performance
+  perfMonth: Last month performance
+  perfQuarter: Last quarter performance
+  perfYtd: Year to date performance
+  perfYear: Last year performance
+  perfHalfYear: Last half year performance
+  epsYYTtm: Year to date earnings growth
+  epsQQ: Quarterly earnings growth
+  salesYYTtm: Year to date sales growth
+  salesQQ: Quarterly sales growth
+  high52W: 52-week high
+  changeVolume: Last day volume change
+  changeRelativeVolume: Last day relative volume change
+  changeInstOwnWeek: Last week inst ownership change
+  changeInsiderOwnWeekChange: Last week insider ownership change
+  changeShortFloatWeekChange: Last week short float change
+  rsi: RSI
+search:
+  company: Company
+  fundamentals: Fundamentals
+  technical: Technical
+  performance: Performance
+  statistics: Statistics

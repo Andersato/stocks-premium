@@ -8,13 +8,17 @@ final class RangeInformationType implements InformationTypeInterface
 {
     use InformationItemTrait;
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
+        if ('-' === $this->value) {
+            return null;
+        }
+
         return $this->value;
     }
 
     public function getType(): string
     {
-        return InformationItemConstants::RANGE_TYPE;
+        return 'float';
     }
 }

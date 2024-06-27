@@ -1,0 +1,35 @@
+{% trans_default_domain 'show' %}
+
+<div class="col-md-2">
+    <h2>{{ 'titles.profitability'|trans }}</h2>
+    <div class="table-responsive">
+        <table class="table table-dark table-borderless table-sm">
+            <tbody>
+            <tr>
+                <td class="table-dark">{{ 'table.roe'|trans }}</td>
+                <td class="table-success">{{ informationStock.roe }} %</td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.roa'|trans }}</td>
+                <td class="table-success">{{ informationStock.roa }} %</td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.roi'|trans }}</td>
+                <td class="table-success">{{ informationStock.roi }} %</td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.grossMargin'|trans }}</td>
+                <td class="table-success">{{ informationStock.grossMargin }} %</td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.operatingMargin'|trans }}</td>
+                <td class="table-success">{{ informationStock.operMargin }} %</td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.netMargin'|trans }}</td>
+                <td class="table-success">{{ informationStock.profitMargin }} %</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

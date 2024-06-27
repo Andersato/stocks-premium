@@ -1,0 +1,22 @@
+table:
+  ticker: Ticker
+  name: Name
+  sector: Sector
+  industry: Industry
+  marketCap: Market Cap (MM)
+  price: Price
+  high52W: High 52W
+  distance52W: Distance 52W
+  priceClose: Price Close
+  change: Change
+  titleNumberStocks: Number stocks
+form:
+  submit: Search
+performance:
+  titles:
+    topGainers: Top Gainers
+    topLosers: Top Losers
+    smallCaps: Small Caps
+    midCaps: Mid Caps
+    largeCaps: Large Caps
+    megaCaps: Mega Caps

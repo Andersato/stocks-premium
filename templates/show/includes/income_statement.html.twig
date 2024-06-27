@@ -1,0 +1,35 @@
+{% trans_default_domain 'show' %}
+
+<div class="col-md-2">
+    <h2>{{ 'titles.incomeStatement'|trans }}</h2>
+    <div class="table-responsive">
+        <table class="table table-dark table-borderless table-sm">
+            <tbody>
+            <tr>
+                <td class="table-dark">{{ 'table.income'|trans }}</td>
+                <td class="table-success">{{ informationStock.income }} (MM)</td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.sales'|trans }}</td>
+                <td class="table-success">{{ informationStock.sales }} (MM) </td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.eps'|trans }}</td>
+                <td class="table-success">{{ informationStock.per }} </td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.epsGrowth'|trans }}</td>
+                <td class="table-success">{{ informationStock.epsYYTtm }} %</td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.salesGrowth'|trans }}</td>
+                <td class="table-success">{{ informationStock.salesYYTtm }} %</td>
+            </tr>
+            <tr>
+                <td class="table-dark">{{ 'table.salesQuarter'|trans }}</td>
+                <td class="table-success">{{ informationStock.salesQQ }} %</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

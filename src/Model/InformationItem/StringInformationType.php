@@ -8,13 +8,17 @@ final class StringInformationType implements InformationTypeInterface
 {
     use InformationItemTrait;
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
+        if ('-' === $this->value) {
+            return null;
+        }
+
         return $this->value;
     }
 
     public function getType(): string
     {
-        return InformationItemConstants::STRING_TYPE;
+        return 'string';
     }
 }

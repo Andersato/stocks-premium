@@ -11,12 +11,20 @@ final class DateInformationType implements InformationTypeInterface
     final public const BMO = 'BMO';
     final public const AMC = 'AMC';
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
+        if ('-' === $this->value) {
+            return null;
+        }
+
+        $currentDate = new \DateTime();
         if (str_contains($this->value, self::BMO) || str_contains($this->value, self::AMC)) {
-            $date = new \DateTime();
-            $this->value = str_replace(' '.self::AMC, ', '.$date->format('Y'), $this->value);
-            $this->value = str_replace(' '.self::BMO, ', '.$date->format('Y'), $this->value);
+            $this->value = str_replace(' '.self::AMC, ', '.$currentDate->format('Y'), $this->value);
+            $this->value = str_replace(' '.self::BMO, ', '.$currentDate->format('Y'), $this->value);
+        }
+
+        if(!str_contains($this->value, ',')) {
+            $this->value .= ', '.$currentDate->format('Y');
         }
 
         $date = \DateTime::createFromFormat('M d, Y', $this->value);
@@ -26,6 +34,6 @@ final class DateInformationType implements InformationTypeInterface
 
     public function getType(): string
     {
-        return InformationItemConstants::DATE_TYPE;
+        return 'date';
     }
 }
