@@ -27,11 +27,15 @@ final class ParamsElasticSearch
     final public const LTE = 'lte';
     final public const TOP_DOCS = 'top_docs';
     final public const TOP_HITS = 'top_hits';
+    final public const HITS = 'hits';
     final public const SOURCE = '_source';
     final public const ORDER = 'order';
     final public const ASC = 'asc';
     final public const DESC = 'desc';
     final public const MAX = 'max';
     final public const MIN = 'min';
-
+    final public const AGGREGATIONS = 'aggregations';
+    final public const BUCKETS = 'buckets';
+    final public const KEY = 'key';
+    final public const DOC_COUNT = 'doc_count';
 }

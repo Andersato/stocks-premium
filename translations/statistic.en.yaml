@@ -20,9 +20,39 @@ form:
   changeInsiderOwnWeekChange: Last week insider ownership change
   changeShortFloatWeekChange: Last week short float change
   rsi: RSI
+  roe: ROE
+  roa: ROA
+  roi: ROI
 search:
   company: Company
   fundamentals: Fundamentals
   technical: Technical
   performance: Performance
   statistics: Statistics
+  efficiency: Efficiency
+stocks:
+  ticker: Ticker
+  name: Name
+  marketCap: Market Cap
+  sector: Sector
+  industry: Industry
+  price: Price
+  perfWeek: Lt week perf
+  perfMonth: Lt month perf
+  perfQuarter: Lt quarter perf
+  perfYtd: Ytd perf
+  perfYear: Lt year perf
+  perfHalfYear: Lt half year perf
+  epsYYTtm: Ytd earnings growth
+  epsQQ: Q/Q earnings growth
+  salesYYTtm: Ytd sales growth
+  salesQQ: Q/Q sales growth
+  high52W: 52-week high
+  changeVolume: Lt day volume change
+  changeRelativeVolume: Lt day relative volume change
+  changeInstOwnWeek: Lt week inst own change
+  changeInsiderOwnWeek: Lt week ins own change
+  changeShortFloatWeek: Lt week short float change
+  roe: ROE
+  roa: ROA
+  roi: ROI

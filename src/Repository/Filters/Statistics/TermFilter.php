@@ -20,7 +20,7 @@ abstract class TermFilter implements StatisticFilterInterface
 
     public function createFilter(): array
     {
-        if (null === $this->getText()) {
+        if (empty($this->getText())) {
             return [];
         }
 

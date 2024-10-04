@@ -15,4 +15,9 @@ final class Utils
 
         return \DateTime::createFromFormat('M d, Y', $date);
     }
+
+    public static function getFilterAggregationValue(array $data): int
+    {
+        return intval($data['value']);
+    }
 }

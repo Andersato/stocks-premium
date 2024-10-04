@@ -25,16 +25,14 @@ class High52WFilterFormType extends AbstractType
                 'required' => false,
                 'label' => 'Min',
                 'attr' => [
-                    'placeholder' => '-50',
-                    'min' => -50,
+                    'placeholder' => $options['min'],
                 ],
             ])
             ->add('maxValue', IntegerType::class, [
                 'required' => false,
                 'label' => 'Max',
                 'attr' => [
-                    'placeholder' => '250',
-                    'max' => 250
+                    'placeholder' => $options['max'],
                 ],
             ]);
     }
@@ -43,6 +41,8 @@ class High52WFilterFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => High52WFilter::class,
+            'min' => [],
+            'max' => [],
         ]);
     }
 }

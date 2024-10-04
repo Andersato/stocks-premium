@@ -24,6 +24,7 @@ services:
       - ./:/var/www/html/
       - ./etc/docker/php/conf:/etc/apache2/sites-available/
       - ~/.ssh:/root/.ssh
+      - ./etc/docker/php/php.ini:/usr/local/etc/php/php.ini
     ports:
       - 8001:80
     links:
@@ -46,8 +47,8 @@ services:
     container_name: finviz-rabbitmq
     image: rabbitmq:3.7-management
     ports:
-        - "5672:5672"
-        - "32768:15672"
+        - "5673:5672"
+        - "32769:15672"
 
   mail:
     platform: linux/amd64

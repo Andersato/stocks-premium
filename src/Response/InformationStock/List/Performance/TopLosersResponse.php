@@ -7,10 +7,10 @@ namespace App\Response\InformationStock\List\Performance;
 
 final class TopLosersResponse
 {
-    private array $smallCaps;
-    private array $midCaps;
-    private array $largeCaps;
-    private array $megaCaps;
+    private array $smallCaps = [];
+    private array $midCaps = [];
+    private array $largeCaps = [];
+    private array $megaCaps = [];
 
     public function addSmallCaps(GetPerformanceInformationStockResponse $performanceInformationStockResponse, string $industry): void
     {

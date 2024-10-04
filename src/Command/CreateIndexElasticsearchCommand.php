@@ -58,91 +58,100 @@ class CreateIndexElasticsearchCommand extends Command
                 ],
                 'mappings' => [
                     'properties' => [
-                        'ticker' => [
+                        ElasticsearchConstants::FIELD_TICKER => [
                             'type' => 'keyword'
                         ],
-                        'name' => [
+                        ElasticsearchConstants::FIELD_NAME => [
                             'type' => 'keyword'
                         ],
-                        'price' => [
+                        ElasticsearchConstants::FIELD_PRICE => [
                             'type' => 'float'
                         ],
-                        'sector' => [
+                        ElasticsearchConstants::FIELD_SECTOR => [
                             'type' => 'keyword'
                         ],
-                        'industry' => [
+                        ElasticsearchConstants::FIELD_INDUSTRY => [
                             'type' => 'keyword'
                         ],
-                        'marketCap' => [
+                        ElasticsearchConstants::FIELD_MARKET_CAP => [
                             'type' => 'float'
                         ],
-                        'changeVolume' => [
+                        ElasticsearchConstants::FIELD_CHANGE_VOLUME => [
                             'type' => 'float'
                         ],
-                        'changeRelativeVolume' => [
+                        ElasticsearchConstants::FIELD_CHANGE_RELATIVE_VOLUME => [
                             'type' => 'float'
                         ],
-                        'changeInstOwn' => [
+                        ElasticsearchConstants::FIELD_CHANGE_INST_OWN => [
                             'type' => 'float'
                         ],
-                        'changeInstOwnWeek' => [
+                        ElasticsearchConstants::FIELD_CHANGE_INST_OWN_WEEK => [
                             'type' => 'float'
                         ],
-                        'changeInsiderOwn' => [
+                        ElasticsearchConstants::FIELD_CHANGE_INSIDER_OWN => [
                             'type' => 'float'
                         ],
-                        'changeInsiderOwnWeek' => [
+                        ElasticsearchConstants::FIELD_CHANGE_INSIDER_OWN_WEEK => [
                             'type' => 'float'
                         ],
-                        'changeShortFloat' => [
+                        ElasticsearchConstants::FIELD_CHANGE_SHORT_FLOAT => [
                             'type' => 'float'
                         ],
-                        'changeShortFloatWeek' => [
+                        ElasticsearchConstants::FIELD_CHANGE_SHORT_FLOAT_WEEK => [
                             'type' => 'float'
                         ],
-                        'changePrice' => [
+                        ElasticsearchConstants::FIELD_CHANGE_PRICE => [
                             'type' => 'float'
                         ],
-                        'perfWeek' => [
+                        ElasticsearchConstants::FIELD_PERF_WEEK => [
                             'type' => 'float'
                         ],
-                        'perfMonth' => [
+                        ElasticsearchConstants::FIELD_PERF_MONTH => [
                             'type' => 'float'
                         ],
-                        'perfQuarter' => [
+                        ElasticsearchConstants::FIELD_PERF_QUARTER => [
                             'type' => 'float'
                         ],
-                        'perfHalfYear' => [
+                        ElasticsearchConstants::FIELD_PERF_HALF_YEAR => [
                             'type' => 'float'
                         ],
-                        'perfYear' => [
+                        ElasticsearchConstants::FIELD_PERF_YEAR => [
                             'type' => 'float'
                         ],
-                        'perfYtd ' => [
+                        ElasticsearchConstants::FIELD_PERF_YTD => [
                             'type' => 'float'
                         ],
-                        'high52W' => [
+                        ElasticsearchConstants::FIELD_HIGH_52W => [
                             'type' => 'float'
                         ],
-                        'epsYYTtm' => [
+                        ElasticsearchConstants::FIELD_EPS_YY_TTM => [
                             'type' => 'float'
                         ],
-                        'epsQQ' => [
+                        ElasticsearchConstants::FIELD_EPS_QQ => [
                             'type' => 'float'
                         ],
-                        'salesYYTtm' => [
+                        ElasticsearchConstants::FIELD_SALES_YY_TTM => [
                             'type' => 'float'
                         ],
-                        'salesQQ' => [
+                        ElasticsearchConstants::FIELD_SALES_QQ => [
                             'type' => 'float'
                         ],
-                        'rsi' => [
+                        ElasticsearchConstants::FIELD_RSI => [
                             'type' => 'float'
                         ],
-                        'volume' => [
+                        ElasticsearchConstants::FIELD_VOLUME => [
                             'type' => 'float'
                         ],
-                        'avgVolume' => [
+                        ElasticsearchConstants::FIELD_AVG_VOLUME => [
+                            'type' => 'float'
+                        ],
+                        ElasticsearchConstants::FIELD_ROI => [
+                            'type' => 'float'
+                        ],
+                        ElasticsearchConstants::FIELD_ROE => [
+                            'type' => 'float'
+                        ],
+                        ElasticsearchConstants::FIELD_ROA => [
                             'type' => 'float'
                         ],
                     ]

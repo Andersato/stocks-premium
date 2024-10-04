@@ -29,7 +29,7 @@ class QueryBuilder {
     }
 
     public function sort($field, $order): self {
-        $this->query[ParamsElasticSearch::SORT][] = [$field => $order];
+        $this->query[ParamsElasticSearch::SORT][] = [$field => [ParamsElasticSearch::ORDER => $order]];
         return $this;
     }
 
@@ -43,8 +43,31 @@ class QueryBuilder {
         return $this;
     }
 
-    public function aggregation($name, $type, $field, $options = []): self {
+    public function aggregation(string $name, string $type, string $field, array $options = []): self {
         $this->query[ParamsElasticSearch::AGGS][$name][$type] = array_merge([ParamsElasticSearch::FIELD => $field], $options);
+        return $this;
+    }
+
+    public function aggregationIntoAggregation(string $parentName, string $name, string $type, string $field, array $options = []): self {
+        $this->query[ParamsElasticSearch::AGGS][$parentName][ParamsElasticSearch::AGGS][$name][$type] = array_merge([ParamsElasticSearch::FIELD => $field], $options);
+        return $this;
+    }
+
+    public function buildAggregation(string $name, string $type, array $options = [], array $aggregations = []): array
+    {
+        $aggregation = [];
+
+        $aggregation[ParamsElasticSearch::AGGS][$name][$type] = $options;
+
+        if ([] !== $aggregations) {
+            $aggregation[ParamsElasticSearch::AGGS][$name] = array_merge($aggregation[ParamsElasticSearch::AGGS][$name], $aggregations);
+        }
+
+        return $aggregation;
+    }
+
+    public function addAggregation(array $aggregations = []): self {
+        $this->query = array_merge($this->query, $aggregations);
         return $this;
     }
 

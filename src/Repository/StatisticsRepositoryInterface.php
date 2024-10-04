@@ -6,6 +6,6 @@ use App\Repository\Filters\Statistics\StatisticFilter;
 
 interface StatisticsRepositoryInterface
 {
-    public function searchByFilters(StatisticFilter $filters): void;
-    public function findAggregationsToFilters(StatisticFilter $filters);
+    public function searchByFilters(StatisticFilter $filters): array;
+    public function findAggregationsToFilters(StatisticFilter $filters): array;
 }

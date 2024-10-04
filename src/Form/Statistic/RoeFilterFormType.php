@@ -2,9 +2,15 @@
 
 namespace App\Form\Statistic;
 
+use App\Repository\Filters\Statistics\EpsYYTtmFilter;
 use App\Repository\Filters\Statistics\PerfWeekFilter;
+use App\Repository\Filters\Statistics\PerfYearFilter;
 use App\Repository\Filters\Statistics\PerfYtdFilter;
 use App\Repository\Filters\Statistics\PriceFilter;
+use App\Repository\Filters\Statistics\RoeFilter;
+use App\Repository\Filters\Statistics\RsiFilter;
+use App\Repository\Filters\Statistics\SalesQQFilter;
+use App\Repository\Filters\Statistics\SalesYYTtmFilter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -12,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class PerfYTdFilterFormType extends AbstractType
+class RoeFilterFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -36,7 +42,7 @@ class PerfYTdFilterFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => PerfYtdFilter::class,
+            'data_class' => RoeFilter::class,
             'min' => [],
             'max' => [],
         ]);

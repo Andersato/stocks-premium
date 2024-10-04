@@ -21,6 +21,9 @@ use App\Repository\Filters\Statistics\PerfYearFilter;
 use App\Repository\Filters\Statistics\PerfYtdFilter;
 use App\Repository\Filters\Statistics\PriceFilter;
 use App\Repository\Filters\Statistics\RangeFilter;
+use App\Repository\Filters\Statistics\RoaFilter;
+use App\Repository\Filters\Statistics\RoeFilter;
+use App\Repository\Filters\Statistics\RoiFilter;
 use App\Repository\Filters\Statistics\RsiFilter;
 use App\Repository\Filters\Statistics\SalesQQFilter;
 use App\Repository\Filters\Statistics\SalesYYTtmFilter;
@@ -73,7 +76,10 @@ final class FloatNormalizer implements DenormalizerInterface, NormalizerInterfac
             PriceFilter::class,
             RsiFilter::class,
             SalesQQFilter::class,
-            SalesYYTtmFilter::class
+            SalesYYTtmFilter::class,
+            RoeFilter::class,
+            RoiFilter::class,
+            RoaFilter::class
         ]);
     }
 

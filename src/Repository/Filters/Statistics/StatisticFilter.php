@@ -22,11 +22,41 @@ final class StatisticFilter
     public SalesYYTtmFilter $salesYYTtm;
     public High52WFilter $high52W;
     public RsiFilter $rsi;
+    public RoeFilter $roe;
+    public RoiFilter $roi;
+    public RoaFilter $roa;
     public ChangeVolumeFilter $changeVolume;
     public ChangeRelativeVolumeFilter $changeRelativeVolume;
     public ChangeInstOwnWeekFilter $changeInstOwnWeek;
     public ChangeInsiderOwnWeekFilter $changeInsiderOwnWeek;
     public ChangeShortFloatWeekFilter $changeShortFloatWeek;
+
+    public function __construct()
+    {
+        $this->sector = new SectorFilter();
+        $this->industry = new IndustryFilter();
+        $this->price = new PriceFilter();
+        $this->perfQuarter = new PerfQuarterFilter();
+        $this->perfWeek = new PerfWeekFilter();
+        $this->perfMonth = new PerfMonthFilter();
+        $this->perfHalfYear = new PerfHalfYearFilter();
+        $this->perfYear = new PerfYearFilter();
+        $this->perfYtd = new PerfYtdFilter();
+        $this->epsQQ = new EpsQQFilter();
+        $this->epsYYTtm = new EpsYYTtmFilter();
+        $this->salesQQ = new SalesQQFilter();
+        $this->salesYYTtm = new SalesYYTtmFilter();
+        $this->high52W = new High52WFilter();
+        $this->rsi = new RsiFilter();
+        $this->roe = new RoeFilter();
+        $this->roi = new RoiFilter();
+        $this->roa = new RoaFilter();
+        $this->changeVolume = new ChangeVolumeFilter();
+        $this->changeRelativeVolume = new ChangeRelativeVolumeFilter();
+        $this->changeInstOwnWeek = new ChangeInstOwnWeekFilter();
+        $this->changeInsiderOwnWeek = new ChangeInsiderOwnWeekFilter();
+        $this->changeShortFloatWeek = new ChangeShortFloatWeekFilter();
+    }
 
     public function getSector(): SectorFilter
     {
@@ -103,6 +133,21 @@ final class StatisticFilter
         return $this->rsi;
     }
 
+    public function getRoe(): RoeFilter
+    {
+        return $this->roe;
+    }
+
+    public function getRoi(): RoiFilter
+    {
+        return $this->roi;
+    }
+
+    public function getRoa(): RoaFilter
+    {
+        return $this->roa;
+    }
+
     public function getChangeVolume(): ChangeVolumeFilter
     {
         return $this->changeVolume;
@@ -142,6 +187,15 @@ final class StatisticFilter
         }
         if ([] !== $this->getRsi()->createFilter()) {
             $queries[] = $this->getRsi()->createFilter();
+        }
+        if ([] !== $this->getRoe()->createFilter()) {
+            $queries[] = $this->getRoe()->createFilter();
+        }
+        if ([] !== $this->getRoi()->createFilter()) {
+            $queries[] = $this->getRoi()->createFilter();
+        }
+        if ([] !== $this->getRoa()->createFilter()) {
+            $queries[] = $this->getRoa()->createFilter();
         }
         if ([] !== $this->getSalesQQ()->createFilter()) {
             $queries[] = $this->getSalesQQ()->createFilter();

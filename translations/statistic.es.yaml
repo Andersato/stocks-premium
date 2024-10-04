@@ -20,3 +20,39 @@ form:
   changeInsiderOwnWeekChange: Cambio propiedad interna última semana
   changeShortFloatWeekChange: Cambio acciones en corto última semana
   rsi: RSI
+  roe: ROE
+  roa: ROA
+  roi: ROI
+search:
+  company: Empresa
+  fundamentals: Fundamentales
+  technical: Técnico
+  performance: Rendimiento
+  statistics: Estadísticas
+  efficiency: Eficiencia
+stocks:
+  ticker: Ticker
+  name: Nombre
+  marketCap: Cap. Bursátil
+  sector: Sector
+  industry: Industria
+  price: Precio
+  perfWeek: Rendimiento última semana
+  perfMonth: Rendimiento último mes
+  perfQuarter: Rendimiento último trimestre
+  perfYtd: Rendimiento año en curso
+  perfYear: Rendimiento último año
+  perfHalfYear: Rendimiento última mitad año
+  epsYYTtm: Crecimiento beneficions año en curso
+  epsQQ: Crecimiento beneficios último trimeste
+  salesYYTtm: Crecimiento ventas año en curso
+  salesQQ: Crecimiento ventas último trimestre
+  high52W: Distancia últimas 52 semanas
+  changeVolume: Cambio volumen último día
+  changeRelativeVolume: Cambio volumen relativo último día
+  changeInstOwnWeek: Cambio propiedad institucional última semana
+  changeInsiderOwnWeek: Cambio propiedad interna última semana
+  changeShortFloatWeek: Cambio acciones en corto última semana
+  roe: ROE
+  roa: ROA
+  roi: ROI

@@ -21,16 +21,14 @@ class PerfQuarterFilterFormType extends AbstractType
                 'required' => false,
                 'label' => 'Min',
                 'attr' => [
-                    'placeholder' => '-50',
-                    'min' => -50,
+                    'placeholder' => $options['min'],
                 ],
             ])
             ->add('maxValue', IntegerType::class, [
                 'required' => false,
                 'label' => 'Max',
                 'attr' => [
-                    'placeholder' => '250',
-                    'max' => 250
+                    'placeholder' => $options['max'],
                 ],
             ]);
     }
@@ -39,6 +37,8 @@ class PerfQuarterFilterFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PerfQuarterFilter::class,
+            'min' => [],
+            'max' => [],
         ]);
     }
 }

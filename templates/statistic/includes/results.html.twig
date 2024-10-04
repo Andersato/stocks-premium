@@ -1,0 +1,133 @@
+{% trans_default_domain 'statistic' %}
+
+<ul class="nav nav-tabs" role="tablist">
+    {% for marketCap in statistics.marketCaps %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if loop.index == 1 %}active{% endif %}" id="{{ marketCap.name }}-tab" data-bs-toggle="tab" data-bs-target="#{{ marketCap.name }}" type="button" role="tab" aria-controls="{{ marketCap.name }}" aria-selected="true">
+                {{ marketCap.title }} ({{ marketCap.count }})
+            </button>
+        </li>
+    {% endfor %}
+</ul>
+
+{% for marketCap in statistics.marketCaps %}
+    <div class="tab-content" id="tabsMarketCaps{{ loop.index }}">
+        <div class="tab-pane fade {% if loop.index == 1 %}show active{% endif %}" id="{{ marketCap.name }}" role="tabpanel" aria-labelledby="{{ marketCap.name }}-tab">
+            <div class="row ms-4 mt-4 me-5 pb-3">
+                {% if 0 < marketCap.sectors|length %}
+                    <ul class="nav nav-tabs" role="tablist">
+                        {% for sector in marketCap.sectors %}
+                            {% set sectorNameId = marketCap.name ~ sector.name %}
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link {% if loop.index == 1 %}active{% endif %}" id="{{ sectorNameId|slug }}-tab" data-bs-toggle="tab" data-bs-target="#{{ sectorNameId|slug }}" type="button" role="tab" aria-controls="{{ sectorNameId|slug }}" aria-selected="true">
+                                    {{ sector.name }}
+                                </button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    {% for sector in marketCap.sectors %}
+                        {% set sectorNameId = marketCap.name ~ sector.name %}
+                        <div class="tab-content overflow-auto" id="tabsStatisticsSector{{ loop.index }}">
+                            <div class="tab-pane fade {% if loop.index == 1 %}show active{% endif %}" id="{{ sectorNameId|slug }}" role="tabpanel" aria-labelledby="{{ sectorNameId|slug }}-tab">
+                                <div class="row mt-3 ms-4">
+                                    <div class="col-md-12">
+                                        {% if 0 < sector.industries|length %}
+                                            <div class="d-flex align-items-start">
+                                                <div class="nav flex-column nav-pills me-3" style="min-width: 300px" id="v-pills-tab-{{ sectorNameId|slug }}-{{ loop.index }}" role="tablist" aria-orientation="vertical">
+                                                    {% for industry in sector.industries %}
+                                                        {% set industryNameId = sectorNameId ~ industry.name %}
+                                                        <button class="nav-link {% if 1 == loop.index %}active{% endif %}" style="text-align: left !important;" id="v-pills-{{ industryNameId|slug }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ industryNameId|slug }}" type="button" role="tab" aria-controls="v-pills-{{ industryNameId|slug }}" aria-selected="true">{{ industry.name }}</button>
+                                                    {% endfor%}
+                                                </div>
+                                                <div class="tab-content" id="v-pills-tabContent-{{ sectorNameId|slug }}-{{ loop.index }}">
+                                                    {% for industry in sector.industries %}
+                                                        {% set industryNameId = sectorNameId ~ industry.name %}
+                                                        <div class="tab-pane fade {% if 1 == loop.index %}show active{% endif %}" id="v-pills-{{ industryNameId|slug }}" role="tabpanel" aria-labelledby="v-pills-{{ industryNameId|slug }}-tab">
+                                                            {% if 0 < industry.stocks|length %}
+                                                                <div class="table-responsive">
+                                                                    <table>
+                                                                        <thead class="align-middle">
+                                                                        <tr>
+                                                                            <th>{{ 'stocks.ticker'|trans }}</th>
+                                                                            <th>{{ 'stocks.name'|trans }}</th>
+                                                                            <th>{{ 'stocks.marketCap'|trans }}</th>
+                                                                            <th>{{ 'stocks.price'|trans }}</th>
+                                                                            <th>{{ 'stocks.perfQuarter'|trans }}</th>
+                                                                            <th>{{ 'stocks.perfWeek'|trans }}</th>
+                                                                            <th>{{ 'stocks.perfMonth'|trans }}</th>
+                                                                            <th>{{ 'stocks.perfHalfYear'|trans }}</th>
+                                                                            <th>{{ 'stocks.perfYtd'|trans }}</th>
+                                                                            <th>{{ 'stocks.perfYear'|trans }}</th>
+                                                                            <th>{{ 'stocks.epsQQ'|trans }}</th>
+                                                                            <th>{{ 'stocks.epsYYTtm'|trans }}</th>
+                                                                            <th>{{ 'stocks.salesQQ'|trans }}</th>
+                                                                            <th>{{ 'stocks.salesYYTtm'|trans }}</th>
+                                                                            <th>{{ 'stocks.high52W'|trans }}</th>
+                                                                            <th>{{ 'stocks.roe'|trans }}</th>
+                                                                            <th>{{ 'stocks.roi'|trans }}</th>
+                                                                            <th>{{ 'stocks.roa'|trans }}</th>
+                                                                            <th>{{ 'stocks.changeVolume'|trans }}</th>
+                                                                            <th>{{ 'stocks.changeRelativeVolume'|trans }}</th>
+                                                                            <th>{{ 'stocks.changeInstOwnWeek'|trans }}</th>
+                                                                            <th>{{ 'stocks.changeInsiderOwnWeek'|trans }}</th>
+                                                                            <th>{{ 'stocks.changeShortFloatWeek'|trans }}</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        {% for item in industry.stocks %}
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td><a href="{{ path('show_stock', {ticker: item.ticker}) }}" target="_blank">{{ item.ticker }}</a></td>
+                                                                                <td>{{ item.name }}</td>
+                                                                                <td>{{ item.marketCap }}</td>
+                                                                                <td>{{ item.price }}</td>
+                                                                                <td class="{% if 15 <= item.perfQuarter %}text-bg-success{% else %}text-bg-danger{% endif %}">{{ item.perfQuarter }} %</td>
+                                                                                <td class="{% if 15 <= item.perfWeek %}text-bg-success{% else %}text-bg-danger{% endif %}"> {{ item.perfWeek }} %</td>
+                                                                                <td class="{% if 15 <= item.perfMonth %}text-bg-success{% else %}text-bg-danger{% endif %}">{{ item.perfMonth }} %</td>
+                                                                                <td class="{% if 15 <= item.perfHalfYear %}text-bg-success{% else %}text-bg-danger{% endif %}"> {{ item.perfHalfYear }} %</td>
+                                                                                <td class="{% if 15 <= item.perfYtd %}text-bg-success{% else %}text-bg-danger{% endif %}"> {{ item.perfYtd }} %</td>
+                                                                                <td class="{% if 15 <= item.perfYear %}text-bg-success{% else %}text-bg-danger{% endif %}"> {{ item.perfYear }} %</td>
+                                                                                <td>{{ item.epsQQ }} %</td>
+                                                                                <td> {{ item.epsYYTtm }} %</td>
+                                                                                <td>{{ item.salesQQ }} %</td>
+                                                                                <td> {{ item.salesYYTtm }} %</td>
+                                                                                <td>{{ item.high52W }} %</td>
+                                                                                <td class="{% if 15 <= item.roe %}text-bg-success{% else %}text-bg-danger{% endif %}">{{ item.roe }}</td>
+                                                                                <td class="{% if 15 <= item.roi %}text-bg-success{% else %}text-bg-danger{% endif %}">{{ item.roi }}</td>
+                                                                                <td class="{% if 6 <= item.roe %}text-bg-success{% else %}text-bg-danger{% endif %}">{{ item.roa }}</td>
+                                                                                <td> {{ item.changeVolume }} %</td>
+                                                                                <td>{{ item.changeRelativeVolume }} %</td>
+                                                                                <td {% if 0 > item.changeInstOwnWeek %}class="text-bg-danger"{% endif %}> {{ item.changeInstOwnWeek }} %</td>
+                                                                                <td {% if 0 > item.changeInsiderOwnWeek %}class="text-bg-danger"{% endif %}> {{ item.changeInsiderOwnWeek }} %</td>
+                                                                                <td {% if 0 > item.changeShortFloatWeek %}class="text-bg-danger"{% endif %}> {{ item.changeShortFloatWeek }} %</td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        {% endfor %}
+                                                                    </table>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endfor%}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{#<div class="tab-content" id="tabsStatistics">#}
+{#    <div class="tab-pane fade show active" id="tabResults" role="tabpanel" aria-labelledby="tabResults-tab">#}
+{#        <div class="row mt-3 ms-4">#}
+{#            <div class="col-md-12">#}
+{#                #}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}

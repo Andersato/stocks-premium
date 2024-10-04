@@ -8,6 +8,7 @@ namespace App\Controller\Statistic;
 use App\Form\Statistic\StatisticFilterFormType;
 use App\Repository\Filters\Statistics\StatisticFilter;
 use App\Service\Statistic\GenerateAggregationsToFiltersService;
+use App\Service\Statistic\GenerateFiltersDataService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +18,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 final class StatisticController extends AbstractController
 {
     private GenerateAggregationsToFiltersService $generateAggregationsToFiltersService;
+    private GenerateFiltersDataService $generateFiltersDataService;
 
-    public function __construct(GenerateAggregationsToFiltersService $generateAggregationsToFiltersService)
+    public function __construct(
+        GenerateAggregationsToFiltersService $generateAggregationsToFiltersService,
+        GenerateFiltersDataService $generateFiltersDataService
+    )
     {
         $this->generateAggregationsToFiltersService = $generateAggregationsToFiltersService;
+        $this->generateFiltersDataService = $generateFiltersDataService;
     }
 
 
@@ -31,6 +37,7 @@ final class StatisticController extends AbstractController
     ): Response
     {
         $data = $request->request->all();
+        $filters = new StatisticFilter();
         if (isset($data['statistic_filter_form'])) {
             $data = $data['statistic_filter_form'];
             unset($data['save']);
@@ -38,33 +45,22 @@ final class StatisticController extends AbstractController
 
             /** @var StatisticFilter $filters */
             $filters = $serializer->deserialize($jsonData, StatisticFilter::class, 'json');
-
-            ($this->generateAggregationsToFiltersService)($filters);
         }
+
+        $aggregations = ($this->generateAggregationsToFiltersService)($filters);
 
         $statisticFilter = new StatisticFilter();
         $form = $this->createForm(StatisticFilterFormType::class, $statisticFilter, [
-//            'filters' => $filters ?? $statisticFilter
+            'aggregations' => $aggregations
         ]);
         $form->handleRequest($request);
 
-//        $filters = GetFiltersListInformationStockDto::create(
-//            sector: $sector,
-//            marketCap: $marketCap,
-//            per: $per,
-//            high52W: $high52W
-//        );
 
-//        $pageResponse = ($this->getListInformationStockService)(
-//            GetListInformationStockDto::create(
-//                filters: $filters,
-//                page: $page,
-//                limit: $limit
-//            )
-//        );
+        $response = ($this->generateFiltersDataService)($statisticFilter);
 
         return $this->render('statistic/index.html.twig', [
             'statisticForm' => $form->createView(),
+            'statistics' => $response
         ]);
     }
 }

@@ -31,10 +31,10 @@ abstract class RangeFilter implements StatisticFilterInterface
         }
 
         $ranges = [];
-        if ($this->getMinValue()) {
+        if (null !== $this->getMinValue()) {
             $ranges[ParamsElasticSearch::GTE] = $this->getMinValue();
         }
-        if ($this->getMaxValue()) {
+        if (null !== $this->getMaxValue()) {
             $ranges[ParamsElasticSearch::LTE] = $this->getMaxValue();
         }
 

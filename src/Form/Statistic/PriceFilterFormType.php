@@ -3,6 +3,7 @@
 namespace App\Form\Statistic;
 
 use App\Repository\Filters\Statistics\PriceFilter;
+use App\Utils\Utils;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -19,16 +20,14 @@ class PriceFilterFormType extends AbstractType
                 'required' => false,
                 'label' => 'Min',
                 'attr' => [
-                    'placeholder' => '-50',
-                    'min' => -50,
+                    'placeholder' => $options['min'],
                 ],
             ])
             ->add('maxValue', IntegerType::class, [
                 'required' => false,
                 'label' => 'Max',
                 'attr' => [
-                    'placeholder' => '250',
-                    'max' => 250
+                    'placeholder' => $options['max'],
                 ],
             ]);
     }
@@ -37,6 +36,8 @@ class PriceFilterFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PriceFilter::class,
+            'min' => [],
+            'max' => [],
         ]);
     }
 }

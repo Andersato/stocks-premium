@@ -100,6 +100,9 @@ final class AddStatisticsElasticsearchHandler
                     'changeInstOwnWeek' => $informationStockLastWeek->getInstOwn() > 0 ? round(($informationStockCurrent->getInstOwn() - $informationStockLastWeek->getInstOwn()) / $informationStockLastWeek->getInstOwn() * 100, 2) : 0,
                     'changeInsiderOwnWeek' => $informationStockLastWeek->getInsiderOwn() > 0 ? round(($informationStockCurrent->getInsiderOwn() - $informationStockLastWeek->getInsiderOwn()) / $informationStockLastWeek->getInsiderOwn() * 100, 2) : 0,
                     'changeShortFloatWeek' => $informationStockLastWeek->getShortFloat() > 0 ? round(($informationStockCurrent->getShortFloat() - $informationStockLastWeek->getShortFloat()) / $informationStockLastWeek->getShortFloat() * 100, 2) : 0,
+                    'roe' => $informationStockCurrent->getRoe(),
+                    'roi' => $informationStockCurrent->getRoi(),
+                    'roa' => $informationStockCurrent->getRoa()
                 ];
 
                 try {

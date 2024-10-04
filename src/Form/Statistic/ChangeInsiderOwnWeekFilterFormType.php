@@ -12,6 +12,7 @@ use App\Repository\Filters\Statistics\PerfYearFilter;
 use App\Repository\Filters\Statistics\PerfYtdFilter;
 use App\Repository\Filters\Statistics\PriceFilter;
 use App\Repository\Filters\Statistics\SalesYYTtmFilter;
+use App\Utils\Utils;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -28,16 +29,14 @@ class ChangeInsiderOwnWeekFilterFormType extends AbstractType
                 'required' => false,
                 'label' => 'Min',
                 'attr' => [
-                    'placeholder' => '-50',
-                    'min' => -50,
+                    'placeholder' => $options['min'],
                 ],
             ])
             ->add('maxValue', IntegerType::class, [
                 'required' => false,
                 'label' => 'Max',
                 'attr' => [
-                    'placeholder' => '250',
-                    'max' => 250
+                    'placeholder' => $options['max'],
                 ],
             ]);
     }
@@ -46,6 +45,8 @@ class ChangeInsiderOwnWeekFilterFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ChangeInsiderOwnWeekFilter::class,
+            'min' => [],
+            'max' => [],
         ]);
     }
 }

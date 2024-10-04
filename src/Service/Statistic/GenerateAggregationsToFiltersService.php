@@ -19,6 +19,6 @@ final class GenerateAggregationsToFiltersService
 
     public function __invoke(StatisticFilter $filter): array
     {
-        $this->statisticsRepository->findAggregationsToFilters($filter);
+        return $this->statisticsRepository->findAggregationsToFilters($filter);
     }
 }

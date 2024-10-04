@@ -1,0 +1,351 @@
+{% trans_default_domain 'statistic' %}
+
+<div class="tab-content" id="tabs">
+    <div class="tab-pane fade show active" id="tabFilters" role="tabpanel" aria-labelledby="tabFilters-tab">
+        <div class="row mt-3 ms-4">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="company-tab" data-bs-toggle="tab" data-bs-target="#company" type="button" role="tab" aria-controls="company" aria-selected="true">
+                            {{ 'search.company'|trans }}
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="efficiency-tab" data-bs-toggle="tab" data-bs-target="#efficiency" type="button" role="tab" aria-controls="efficiency" aria-selected="true">
+                            {{ 'search.efficiency'|trans }}
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="fundamentals-tab" data-bs-toggle="tab" data-bs-target="#fundamentals" type="button" role="tab" aria-controls="fundamentals" aria-selected="true">
+                            {{ 'search.fundamentals'|trans }}
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="technical-tab" data-bs-toggle="tab" data-bs-target="#technical" type="button" role="tab" aria-controls="technical" aria-selected="true">
+                            {{ 'search.technical'|trans }}
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="performance-tab" data-bs-toggle="tab" data-bs-target="#performance" type="button" role="tab" aria-controls="performance" aria-selected="true">
+                            {{ 'search.performance'|trans }}
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="true">
+                            {{ 'search.statistics'|trans }}
+                        </button>
+                    </li>
+                </ul>
+
+                {{ form_start(statisticForm, {'action': path('statistics'), 'method': 'POST', 'attr': {'class': 'row g-3'}}) }}
+                <div class="tab-content" id="tabs2">
+                    <div class="tab-pane fade show active" id="company" role="tabpanel" aria-labelledby="company-tab">
+                        <div class="row ms-4 mt-4 me-5 pb-3 border bg-light">
+                            <div class="col-md-2">
+                                {{ form_row(statisticForm.sector) }}
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_row(statisticForm.industry) }}
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.price) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.price.minValue) }}
+                                        {{ form_widget(statisticForm.price.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.price.maxValue) }}
+                                        {{ form_widget(statisticForm.price.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="efficiency" role="tabpanel" aria-labelledby="efficiency-tab">
+                        <div class="row ms-4 mt-4 me-5 pb-3 border bg-light">
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.roe) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.roe.minValue) }}
+                                        {{ form_widget(statisticForm.roe.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.roe.maxValue) }}
+                                        {{ form_widget(statisticForm.roe.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.roi) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.roi.minValue) }}
+                                        {{ form_widget(statisticForm.roi.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.roi.maxValue) }}
+                                        {{ form_widget(statisticForm.roi.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.roa) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.roa.minValue) }}
+                                        {{ form_widget(statisticForm.roa.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.roa.maxValue) }}
+                                        {{ form_widget(statisticForm.roa.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="fundamentals" role="tabpanel" aria-labelledby="fundamentals-tab">
+                        <div class="row ms-4 mt-4 me-5 pb-3 border bg-light">
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.epsQQ) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.epsQQ.minValue) }}
+                                        {{ form_widget(statisticForm.epsQQ.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.epsQQ.maxValue) }}
+                                        {{ form_widget(statisticForm.epsQQ.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.epsYYTtm) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.epsYYTtm.minValue) }}
+                                        {{ form_widget(statisticForm.epsYYTtm.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.epsYYTtm.maxValue) }}
+                                        {{ form_widget(statisticForm.epsYYTtm.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.salesQQ) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.salesQQ.minValue) }}
+                                        {{ form_widget(statisticForm.salesQQ.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.salesQQ.maxValue) }}
+                                        {{ form_widget(statisticForm.salesQQ.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.salesYYTtm) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.salesYYTtm.minValue) }}
+                                        {{ form_widget(statisticForm.salesYYTtm.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.salesYYTtm.maxValue) }}
+                                        {{ form_widget(statisticForm.salesYYTtm.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="technical" role="tabpanel" aria-labelledby="technical-tab">
+                        <div class="row ms-4 mt-4 me-5 pb-3 border bg-light">
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.high52W) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.high52W.minValue) }}
+                                        {{ form_widget(statisticForm.high52W.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.high52W.maxValue) }}
+                                        {{ form_widget(statisticForm.high52W.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.rsi) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.rsi.minValue) }}
+                                        {{ form_widget(statisticForm.rsi.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.rsi.maxValue) }}
+                                        {{ form_widget(statisticForm.rsi.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="performance" role="tabpanel" aria-labelledby="performance-tab">
+                        <div class="row ms-4 mt-4 me-5 pb-3 border bg-light">
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.perfWeek) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfWeek.minValue) }}
+                                        {{ form_widget(statisticForm.perfWeek.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfWeek.maxValue) }}
+                                        {{ form_widget(statisticForm.perfWeek.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.perfMonth) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfMonth.minValue) }}
+                                        {{ form_widget(statisticForm.perfMonth.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfMonth.maxValue) }}
+                                        {{ form_widget(statisticForm.perfMonth.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.perfQuarter) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfQuarter.minValue) }}
+                                        {{ form_widget(statisticForm.perfQuarter.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfQuarter.maxValue) }}
+                                        {{ form_widget(statisticForm.perfQuarter.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.perfHalfYear) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfHalfYear.minValue) }}
+                                        {{ form_widget(statisticForm.perfHalfYear.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfHalfYear.maxValue) }}
+                                        {{ form_widget(statisticForm.perfHalfYear.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.perfYear) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfYear.minValue) }}
+                                        {{ form_widget(statisticForm.perfYear.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfYear.maxValue) }}
+                                        {{ form_widget(statisticForm.perfYear.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.perfYtd) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfYtd.minValue) }}
+                                        {{ form_widget(statisticForm.perfYtd.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.perfYtd.maxValue) }}
+                                        {{ form_widget(statisticForm.perfYtd.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
+                        <div class="row ms-4 mt-4 me-5 pb-3 border bg-light">
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.changeVolume) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeVolume.minValue) }}
+                                        {{ form_widget(statisticForm.changeVolume.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeVolume.maxValue) }}
+                                        {{ form_widget(statisticForm.changeVolume.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.changeRelativeVolume) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeRelativeVolume.minValue) }}
+                                        {{ form_widget(statisticForm.changeRelativeVolume.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeRelativeVolume.maxValue) }}
+                                        {{ form_widget(statisticForm.changeRelativeVolume.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.changeInstOwnWeek) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeInstOwnWeek.minValue) }}
+                                        {{ form_widget(statisticForm.changeInstOwnWeek.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeInstOwnWeek.maxValue) }}
+                                        {{ form_widget(statisticForm.changeInstOwnWeek.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.changeInsiderOwnWeek) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeInsiderOwnWeek.minValue) }}
+                                        {{ form_widget(statisticForm.changeInsiderOwnWeek.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeInsiderOwnWeek.maxValue) }}
+                                        {{ form_widget(statisticForm.changeInsiderOwnWeek.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_label(statisticForm.changeShortFloatWeek) }}
+                                <div class="d-flex">
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeShortFloatWeek.minValue) }}
+                                        {{ form_widget(statisticForm.changeShortFloatWeek.minValue) }}
+                                    </div>
+                                    <div class="half-width p-2 border">
+                                        {{ form_label(statisticForm.changeShortFloatWeek.maxValue) }}
+                                        {{ form_widget(statisticForm.changeShortFloatWeek.maxValue) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(statisticForm) }}
+            </div>
+        </div>
+
+    </div>
+</div>
