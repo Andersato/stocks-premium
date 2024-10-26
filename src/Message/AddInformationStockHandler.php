@@ -5,6 +5,7 @@ namespace App\Message;
 use App\Constant\InformationItemConstants;
 use App\Entity\InformationItem;
 use App\Entity\InformationStock;
+use App\Entity\InformationStockReject;
 use App\Entity\Stock;
 use App\Model\InformationItem\InformationItemFactory;
 use App\Model\InformationItem\InformationTypeInterface;
@@ -138,6 +139,13 @@ final class AddInformationStockHandler
                     error: $exception->getMessage()
                 )
             );
+
+            $stockInformationReject =  new InformationStockReject();
+            $stockInformationReject->setDate(new \DateTime());
+            $stockInformationReject->setStockName($message->getName());
+            $stockInformationReject->setTicker($message->getTicker());
+            $this->entityManager->persist($stockInformationReject);
+            $this->entityManager->flush();
         }
     }
 
