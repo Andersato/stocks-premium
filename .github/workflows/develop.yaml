@@ -38,3 +38,5 @@ jobs:
             cd develop/
             sudo -u www-data composer install
             bin/console cache:clear --env=prod
+            npm install
+            npm run dev
