@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Constant\ElasticsearchConstants;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
-use Elastic\Elasticsearch\Exception\AuthenticationException;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
@@ -22,9 +21,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class CreateIndexElasticsearchCommand extends Command
 {
+    private Client $client;
 
     public function __construct(
-        private Client $client,
         private readonly LoggerInterface $logger,
         private readonly string $elasticsearchHost,
         private readonly string $elasticsearchUser,
