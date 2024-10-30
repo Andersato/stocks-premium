@@ -9,6 +9,7 @@ use Elastic\Elasticsearch\Exception\AuthenticationException;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,22 +22,26 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class CreateIndexElasticsearchCommand extends Command
 {
-    private Client $client;
 
-    /**
-     * @throws AuthenticationException
-     */
     public function __construct(
+        private Client $client,
+        private readonly LoggerInterface $logger,
         private readonly string $elasticsearchHost,
         private readonly string $elasticsearchUser,
-        private readonly string $elasticsearchPassword
+        private readonly string $elasticsearchPassword,
+        private readonly bool $elasticsearchSslVerification
     )
     {
-        $this->client = ClientBuilder::create()
-            ->setHosts([$this->elasticsearchHost])
-            ->setBasicAuthentication($this->elasticsearchUser, $this->elasticsearchPassword)
-            ->build()
-        ;
+        try {
+            $this->client = ClientBuilder::create()
+                ->setHosts([$this->elasticsearchHost])
+                ->setBasicAuthentication($this->elasticsearchUser, $this->elasticsearchPassword)
+                ->setSSLVerification($this->elasticsearchSslVerification)
+                ->build()
+            ;
+        } catch (\Exception $exception) {
+            $this->logger->error($exception->getMessage());
+        }
 
         parent::__construct();
     }
