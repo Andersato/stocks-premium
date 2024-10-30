@@ -27,10 +27,16 @@ class CreateIndexElasticsearchCommand extends Command
      * @throws AuthenticationException
      */
     public function __construct(
-        private readonly string $elasticsearchHost
+        private readonly string $elasticsearchHost,
+        private readonly string $elasticsearchUser,
+        private readonly string $elasticsearchPassword
     )
     {
-        $this->client = ClientBuilder::create()->setHosts([$elasticsearchHost])->build();
+        $this->client = ClientBuilder::create()
+            ->setHosts([$this->elasticsearchHost])
+            ->setBasicAuthentication($this->elasticsearchUser, $this->elasticsearchPassword)
+            ->build()
+        ;
 
         parent::__construct();
     }
