@@ -14,19 +14,30 @@ use Elastic\Elasticsearch\ClientBuilder;
 use Elastic\Elasticsearch\Exception\AuthenticationException;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Psr\Log\LoggerInterface;
 
 final class StatisticsRepository implements StatisticsRepositoryInterface
 {
     private Client $client;
 
-    /**
-     * @throws AuthenticationException
-     */
     public function __construct(
-        readonly string $elasticsearchHost
+        private readonly LoggerInterface $logger,
+        private readonly string $elasticsearchHost,
+        private readonly string $elasticsearchUser,
+        private readonly string $elasticsearchPassword,
+        private readonly bool $elasticsearchSslVerification
     )
     {
-        $this->client = ClientBuilder::create()->setHosts([$elasticsearchHost])->build();
+        try {
+            $this->client = ClientBuilder::create()
+                ->setHosts([$this->elasticsearchHost])
+                ->setBasicAuthentication($this->elasticsearchUser, $this->elasticsearchPassword)
+                ->setSSLVerification($this->elasticsearchSslVerification)
+                ->build()
+            ;
+        } catch (\Exception $exception) {
+            $this->logger->error($exception->getMessage());
+        }
     }
 
     /**
