@@ -18,6 +18,7 @@ use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
 use Elastic\Elasticsearch\Exception\AuthenticationException;
 use JetBrains\PhpStorm\NoReturn;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpClient\HttpClient;
@@ -27,19 +28,27 @@ use Symfony\Component\Messenger\MessageBusInterface;
 #[AsMessageHandler]
 final class AddStatisticsElasticsearchHandler
 {
-    private EntityManagerInterface $entityManager;
     private Client $client;
 
-    /**
-     * @throws AuthenticationException
-     */
     public function __construct(
-        EntityManagerInterface $entityManager,
-        private readonly string $elasticsearchHost
+        private readonly EntityManagerInterface $entityManager,
+        private readonly LoggerInterface $logger,
+        private readonly string $elasticsearchHost,
+        private readonly string $elasticsearchUser,
+        private readonly string $elasticsearchPassword,
+        private readonly bool $elasticsearchSslVerification
     )
     {
-        $this->client = ClientBuilder::create()->setHosts([$elasticsearchHost])->build();
-        $this->entityManager = $entityManager;
+        try {
+            $this->client = ClientBuilder::create()
+                ->setHosts([$this->elasticsearchHost])
+                ->setBasicAuthentication($this->elasticsearchUser, $this->elasticsearchPassword)
+                ->setSSLVerification($this->elasticsearchSslVerification)
+                ->build()
+            ;
+        } catch (\Exception $exception) {
+            $this->logger->error($exception->getMessage());
+        }
     }
 
     /**

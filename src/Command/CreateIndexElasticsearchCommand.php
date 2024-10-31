@@ -31,9 +31,6 @@ class CreateIndexElasticsearchCommand extends Command
         private readonly bool $elasticsearchSslVerification
     )
     {
-        print_r('SSL: '.$this->elasticsearchSslVerification);
-
-
         try {
             $this->client = ClientBuilder::create()
                 ->setHosts([$this->elasticsearchHost])
