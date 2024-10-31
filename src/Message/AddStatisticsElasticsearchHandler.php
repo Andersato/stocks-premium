@@ -149,7 +149,7 @@ final class AddStatisticsElasticsearchHandler
                         $this->client->update($paramsToInsert);
                     }
                 } catch (\Exception $exception) {
-                    dd("Error: " . json_encode($body), $exception->getMessage());
+                    $this->logger->error("Error: " . json_encode($body).' --'.$exception->getMessage());
                 }
             }
         } catch (\Exception $exception) {
