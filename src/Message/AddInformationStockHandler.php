@@ -138,14 +138,14 @@ final class AddInformationStockHandler
             $this->entityManager->persist($stockInformationReject);
             $this->entityManager->flush();
 
-            $this->messageBus->dispatch(
-                new SendErrorEmailMessage(
-                    stock: $message->getTicker(),
-                    itemName: $message->getName(),
-                    itemValue: (string) $message->getNumMessage(),
-                    error: $exception->getMessage()
-                )
-            );
+//            $this->messageBus->dispatch(
+//                new SendErrorEmailMessage(
+//                    stock: $message->getTicker(),
+//                    itemName: $message->getName(),
+//                    itemValue: (string) $message->getNumMessage(),
+//                    error: $exception->getMessage()
+//                )
+//            );
         }
     }
 
