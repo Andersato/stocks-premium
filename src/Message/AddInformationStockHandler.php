@@ -131,6 +131,13 @@ final class AddInformationStockHandler
                 $this->entityManager->flush();
             }
         } catch (\Exception|\Throwable $exception) {
+            $stockInformationReject =  new InformationStockReject();
+            $stockInformationReject->setDate(new \DateTime());
+            $stockInformationReject->setStockName($message->getName());
+            $stockInformationReject->setTicker($message->getTicker());
+            $this->entityManager->persist($stockInformationReject);
+            $this->entityManager->flush();
+
             $this->messageBus->dispatch(
                 new SendErrorEmailMessage(
                     stock: $message->getTicker(),
@@ -139,13 +146,6 @@ final class AddInformationStockHandler
                     error: $exception->getMessage()
                 )
             );
-
-            $stockInformationReject =  new InformationStockReject();
-            $stockInformationReject->setDate(new \DateTime());
-            $stockInformationReject->setStockName($message->getName());
-            $stockInformationReject->setTicker($message->getTicker());
-            $this->entityManager->persist($stockInformationReject);
-            $this->entityManager->flush();
         }
     }
 
