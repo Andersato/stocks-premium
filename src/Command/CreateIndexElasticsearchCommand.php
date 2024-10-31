@@ -31,7 +31,7 @@ class CreateIndexElasticsearchCommand extends Command
         private readonly bool $elasticsearchSslVerification
     )
     {
-        $this->logger->info('SSL: '.$this->elasticsearchSslVerification);
+        print_r('SSL: '.$this->elasticsearchSslVerification);
 
 
         try {
