@@ -31,6 +31,9 @@ class CreateIndexElasticsearchCommand extends Command
         private readonly bool $elasticsearchSslVerification
     )
     {
+        $this->logger->info('SSL: '.$this->elasticsearchSslVerification);
+
+
         try {
             $this->client = ClientBuilder::create()
                 ->setHosts([$this->elasticsearchHost])
@@ -171,7 +174,9 @@ class CreateIndexElasticsearchCommand extends Command
 
         try {
             $this->client->indices()->delete(['index' => ElasticsearchConstants::INDEX_NAME]);
-        } catch (\Exception){}
+        } catch (\Exception $exception){
+            $this->logger->error($exception->getMessage());
+        }
 
         $this->client->indices()->create($params);
 
