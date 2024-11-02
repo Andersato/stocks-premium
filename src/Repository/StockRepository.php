@@ -45,8 +45,9 @@ class StockRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('s')
             ->select('s.ticker, s.name')
-            ->where('s.ticker LIKE :ticker')
+            ->where('s.ticker LIKE :ticker or s.name LIKE :name')
             ->setParameter('ticker', $value.'%')
+            ->setParameter('name', '%'.$value.'%')
             ->setMaxResults(15)
             ->orderBy('s.ticker', 'ASC');
 
