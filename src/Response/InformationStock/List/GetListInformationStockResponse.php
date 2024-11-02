@@ -16,8 +16,8 @@ final class GetListInformationStockResponse implements AppResponseInterface
     private float $marketCap;
     private float $price;
     private float $distance52W;
-    private float $high52W;
-    private float $low52W;
+    private ?float $high52W = null;
+    private ?float $low52W = null;
 
     public static function create(
         string $ticker, string $name, string $sector, string $industry,
@@ -72,12 +72,12 @@ final class GetListInformationStockResponse implements AppResponseInterface
         return $this->price;
     }
 
-    public function getHigh52W(): float
+    public function getHigh52W(): ?float
     {
         return $this->high52W;
     }
 
-    public function getLow52W(): float
+    public function getLow52W(): ?float
     {
         return $this->low52W;
     }
