@@ -13,10 +13,10 @@ use App\Response\Page;
 final class GetPageListInformationStockResponse implements AppResponseInterface
 {
     private Page $page;
-    private TopGainersResponse $topGainersResponse;
-    private TopLosersResponse $topLosersResponse;
+    private ?TopGainersResponse $topGainersResponse;
+    private ?TopLosersResponse $topLosersResponse;
 
-    public static function create(Page $page, TopGainersResponse $topGainersResponse, TopLosersResponse $topLosersResponse): self
+    public static function create(Page $page, ?TopGainersResponse $topGainersResponse = null, ?TopLosersResponse $topLosersResponse = null): self
     {
         $response = new self();
 
@@ -32,12 +32,12 @@ final class GetPageListInformationStockResponse implements AppResponseInterface
         return $this->page;
     }
 
-    public function getTopGainersResponse(): TopGainersResponse
+    public function getTopGainersResponse(): ?TopGainersResponse
     {
         return $this->topGainersResponse;
     }
 
-    public function getTopLosersResponse(): TopLosersResponse
+    public function getTopLosersResponse(): ?TopLosersResponse
     {
         return $this->topLosersResponse;
     }

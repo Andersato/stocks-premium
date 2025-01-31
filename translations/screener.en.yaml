@@ -20,3 +20,15 @@ performance:
     midCaps: Mid Caps
     largeCaps: Large Caps
     megaCaps: Mega Caps
+sectors:
+  basicMaterials: Basic Materials
+  communicationServices: Communication Services
+  consumerCyclical: Consumer Cyclical
+  consumerDefensive: Consumer Defensive
+  energy: Energy
+  financial: Financial
+  healthcare: Healthcare
+  industrials: Industrials
+  realEstate: Real Estate
+  technology: Technology
+  utilities: Utilities

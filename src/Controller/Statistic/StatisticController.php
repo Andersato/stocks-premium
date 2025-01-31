@@ -42,6 +42,7 @@ final class StatisticController extends AbstractController
             $data = $data['statistic_filter_form'];
             unset($data['save']);
             $jsonData = json_encode($data);
+            dd($jsonData);
 
             /** @var StatisticFilter $filters */
             $filters = $serializer->deserialize($jsonData, StatisticFilter::class, 'json');

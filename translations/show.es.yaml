@@ -1,0 +1,53 @@
+titles:
+  profile: Perfil
+  financial_health: Salud Financiera
+  income_statement: Estado de Resultados
+  profitability: Rentabilidad
+  valuation: Valoración
+  growth: Growth Ratios
+  graphics: Graphics
+  tabs:
+    priceAndVolume: Price And Volume
+    institutionalOwn: Institutional Own
+    volume: Volume
+    price: Price
+    shortFloat: Short float
+profile_fields:
+  ticker: "Ticker"
+  name: "Nombre"
+  sector: "Sector"
+  industry: "Industria"
+  index_name: "Índice"
+  market_cap: "Capitalización de Mercado"
+  employees: "Empleados"
+  beta: "Beta"
+  price: "Precio"
+financial_health_fields:
+  quick_ratio: "Ratio Rápido"
+  current_ratio: "Ratio Actual"
+  book_sh: "Valor en Libros por Acción"
+  cash_sh: "Efectivo por Acción"
+  debt_equity: "Deuda / Capital"
+  lt_debt_equity: "Deuda Largo Plazo / Capital"
+income_statement_fields:
+  income: "Ingresos Netos"
+  sales: "Ventas"
+  eps_ttm: "BPA (Últimos 12 Meses)"
+  eps_yyttm: "Crecimiento BPA Interanual (Últimos 12 Meses)"
+  sales_yyttm: "Crecimiento Ventas Interanual (Últimos 12 Meses)"
+  eps_qq: "Crecimiento BPA Trimestral"
+  sales_qq: "Crecimiento Ventas Trimestral"
+profitability_fields:
+  roa: "Rentabilidad sobre Activos (ROA)"
+  roe: "Rentabilidad sobre Patrimonio (ROE)"
+  roi: "Rentabilidad de la Inversión (ROI)"
+  gross_margin: "Margen Bruto"
+  oper_margin: "Margen Operativo"
+  profit_margin: "Margen de Beneficio"
+valuation_fields:
+  per: "PER"
+  forward_per: "PER Proyectado"
+  peg: "PEG"
+  price_sales: "Precio/Ventas"
+  price_book: "Precio/Valor en Libros"
+  price_free_cash_flow: "Precio/Flujo de Caja Libre"

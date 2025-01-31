@@ -25,10 +25,10 @@ RUN echo "Package: node* \nPin: release *\nPin-Priority: -1" > /etc/apt/preferen
     apt-get update && \
     apt-get install nodejs -y
 
-ADD ./etc/docker/php/php.ini /etc/php.ini
+ADD ../etc/docker/php/php.ini /etc/php.ini
 
 # timezone env with default
-ENV TZ Europe/Madrid
+ENV TZ=Europe/Madrid
 
 RUN if [ ${XDEBUG_ENABLED} = "true" ] ; then \
         pecl install xdebug; \

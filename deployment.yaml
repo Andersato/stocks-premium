@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-stats
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: back-stats
+  template:
+    metadata:
+      labels:
+        app: back-stats
+    spec:
+      containers:
+        - name: php
+          image: andersato/back-stats
+          ports:
+            - containerPort: 80
+        - name: elasticsearch
+          image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+          env:
+            - name: ELASTIC_PASSWORD
+              value: "elastic"
+          ports:
+            - containerPort: 9200

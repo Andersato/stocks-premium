@@ -13,37 +13,37 @@ titles:
     volume: Volume
     price: Price
     shortFloat: Short float
-table:
-  name: Name
-  sector: Sector
-  industry: Industry
-  index: Index
-  marketCap: Market Cap
-  employees: Employees
-  beta: Beta
-  income: Income
-  sales: Sales
-  per: P/E
-  forwardPer: Forward P/E
-  peg: P/E to Growth
-  priceFCF: P/FCF
-  priceSales: P/S
-  priceBook: P/B
-  roa: ROA
-  roe: ROE
-  roi: ROI
-  eps: EPS (TTM)
-  salesPast5Year: Sales Past 5 Year
-  epsGrowth: EPS Growth Y/Y
-  epsQuarter: EPS Q/Q
-  salesGrowth: Sales Growth Y/Y
-  salesQuarter: Sales Q/Q
-  operatingMargin: Operating Margin
-  netMargin: Net Margin
-  grossMargin: Gross Margin
-  quickRatio: Quick Ratio
-  currentRatio: Current Ratio
-  bookValue: Book Value/Share
-  cashShare: Cash/Share
-  debtEquity: Debt/Equity
-  longTermDebt: LT Debt/Equity
+ticker: "Ticker"
+name: "Name"
+sector: "Sector"
+industry: "Industry"
+index_name: "Index"
+market_cap: "Market Cap"
+employees: "Employees"
+beta: "Beta"
+price: "Price"
+quick_ratio: "Quick Ratio"
+current_ratio: "Current Ratio"
+book_sh: "Book Value per Share"
+cash_sh: "Cash per Share"
+debt_equity: "Debt/Equity"
+lt_debt_equity: "Long-Term Debt/Equity"
+income: "Net Income"
+sales: "Sales"
+eps_ttm: "EPS (ttm)"
+eps_yyttm: "Y/Y EPS Growth (ttm)"
+sales_yyttm: "Y/Y Sales Growth (ttm)"
+eps_qq: "Quarterly EPS Growth"
+sales_qq: "Quarterly Sales Growth"
+roa: ROA
+roe: ROE
+roi: ROI
+gross_margin: Gross Margin
+oper_margin: Oper. Margin
+profit_margin: "Profit Margin"
+per: "P/E Ratio"
+forward_per: "Forward P/E"
+peg: "PEG Ratio"
+price_sales: "Price/Sales"
+price_book: "Price/Book"
+price_free_cash_flow: "Price/Free Cash Flow"

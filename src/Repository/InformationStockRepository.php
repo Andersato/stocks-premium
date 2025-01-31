@@ -5,8 +5,10 @@ namespace App\Repository;
 use App\Constant\FiltersConstants;
 use App\Constant\InformationStockConstants;
 use App\Dto\InformationStock\GetFiltersListInformationStockDto;
+use App\Dto\InformationStock\GetFiltersPerformanceInformationStockDto;
 use App\Entity\InformationStock;
 use App\Entity\Stock;
+use App\Enum\PerformanceEnum;
 use App\Repository\Filters\GetMarketCapFilter;
 use App\Repository\Filters\GetPerFilter;
 use App\Repository\Filters\GetHigh52WFilter;
@@ -112,6 +114,56 @@ class InformationStockRepository extends ServiceEntityRepository
 
         if ($filters->getHigh52W()) {
             GetHigh52WFilter::get($qb, $filters->getHigh52W());
+        }
+
+        $qb->addOrderBy('stock.ticker', 'ASC');
+
+        return $qb->getQuery();
+    }
+
+    public function findByPerformance(GetFiltersPerformanceInformationStockDto $filters, int $page = 1, int $limit = 20): Query
+    {
+        $qb = $this->createQueryBuilder('informationStock')
+            ->select('stock.id,stock.ticker,stock.name,stock.sector,stock.industry,informationStock.price,informationStock.prevClose,informationStock.changeToday,informationStock.marketCap')
+            ->join('informationStock.stock', 'stock');
+
+        $maxCreatedAt = $this->createQueryBuilder('infStock')
+            ->select('MAX(infStock.createdAt) as maxCreatedAt')
+            ->getQuery()->getScalarResult();
+
+        $qb
+            ->where('informationStock.createdAt = :maxCreatedAt')
+            ->setParameter('maxCreatedAt', $maxCreatedAt[0]['maxCreatedAt']);
+
+        if ($filters->getMarketCap()) {
+            switch ($filters->getMarketCap()) {
+                case PerformanceEnum::SmallCaps->value:
+                    $qb->andWhere('informationStock.marketCap <= 2000'); break;
+                case PerformanceEnum::MidCaps->value:
+                    $qb->andWhere('informationStock.marketCap > 2000 and informationStock.marketCap <= 10000'); break;
+                case PerformanceEnum::LargeCaps->value:
+                    $qb->andWhere('informationStock.marketCap > 10000 and informationStock.marketCap < 200000'); break;
+                case PerformanceEnum::MegaCaps->value:
+                    $qb->andWhere('informationStock.marketCap > 200000'); break;
+            }
+        }
+
+        if (PerformanceEnum::TopGainers === $filters->getPerformanceCategory()) {
+            $qb
+                ->andWhere('informationStock.changeToday > 0')
+                ->addOrderBy('informationStock.changeToday', 'DESC');
+        }
+
+        if (PerformanceEnum::ToLosers === $filters->getPerformanceCategory()) {
+            $qb
+                ->andWhere('informationStock.changeToday < 0')
+                ->addOrderBy('informationStock.changeToday', 'ASC');
+        }
+
+        if ($filters->getSector()) {
+            $qb
+                ->andWhere('stock.sector = :sector')
+                ->setParameter('sector', $filters->getSector());
         }
 
         $qb->addOrderBy('stock.ticker', 'ASC');

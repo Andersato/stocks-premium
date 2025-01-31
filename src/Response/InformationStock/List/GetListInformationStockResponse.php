@@ -17,7 +17,7 @@ final class GetListInformationStockResponse implements AppResponseInterface
     private float $price;
     private float $distance52W;
     private ?float $high52W = null;
-    private ?float $low52W = null;
+//    private ?float $low52W = null;
 
     public static function create(
         string $ticker, string $name, string $sector, string $industry,
@@ -35,7 +35,7 @@ final class GetListInformationStockResponse implements AppResponseInterface
         $response->distance52W = $distance52W;
 
         if (preg_match('/^\s*([0-9.]+)\s*-\s*([0-9.]+)\s*$/', $range52W, $matches)) {
-            $response->low52W = (float) $matches[1];
+//            $response->low52W = (float) $matches[1];
             $response->high52W = (float) $matches[2];
         }
 
@@ -77,10 +77,10 @@ final class GetListInformationStockResponse implements AppResponseInterface
         return $this->high52W;
     }
 
-    public function getLow52W(): ?float
-    {
-        return $this->low52W;
-    }
+//    public function getLow52W(): ?float
+//    {
+//        return $this->low52W;
+//    }
 
     public function getDistance52W(): float
     {

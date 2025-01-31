@@ -16,26 +16,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
-final class GetListInformationStockService
+final readonly class GetListInformationStockService
 {
-    private EntityManagerInterface $entityManager;
-    private TopGainersService $topGainersService;
-
-    private TopLosersService $topLosersService;
-    private PaginatorInterface $paginator;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        TopGainersService $topGainersService,
-        TopLosersService $topLosersService,
-        PaginatorInterface $paginator
+        private EntityManagerInterface $entityManager,
+        private TopGainersService $topGainersService,
+        private TopLosersService $topLosersService,
+        private PaginatorInterface $paginator
 
     )
     {
-        $this->entityManager = $entityManager;
-        $this->topGainersService = $topGainersService;
-        $this->topLosersService = $topLosersService;
-        $this->paginator = $paginator;
     }
 
     public function __invoke(GetListInformationStockDto $listInformationStockDto): GetPageListInformationStockResponse
@@ -68,7 +58,7 @@ final class GetListInformationStockService
             );
         }
 
-        $page =  Page::create($items, $total, $listInformationStockDto->getPage(), $listInformationStockDto->getLimit());
+        $page =  Page::create($items, new ArrayCollection(), $total, $listInformationStockDto->getPage(), $listInformationStockDto->getLimit());
 
         return GetPageListInformationStockResponse::create(
             page: $page,

@@ -5,9 +5,10 @@ namespace App\Response;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Page
+class Page implements AppResponseInterface
 {
     private Collection $items;
+    private Collection $headers;
     private int $total;
     private int $page;
     private int $limit;
@@ -15,12 +16,14 @@ class Page
     private function __construct()
     {
         $this->items = new ArrayCollection();
+        $this->headers = new ArrayCollection();
     }
 
-    public static function create(Collection $items, int $total, int $numPage = 1, int $limit = 10): self
+    public static function create(Collection $items, Collection $headers, int $total, int $numPage = 1, int $limit = 10): self
     {
         $page = new self();
         $page->setItems($items);
+        $page->setHeaders($headers);
         $page->setTotal($total);
         $page->setPage($numPage);
         $page->setLimit($limit);
@@ -36,6 +39,16 @@ class Page
     private function setItems(Collection $items): void
     {
         $this->items = $items;
+    }
+
+    private function setHeaders(Collection $headers): void
+    {
+        $this->headers = $headers;
+    }
+
+    public function getHeaders(): Collection
+    {
+        return $this->headers;
     }
 
     public function getTotal(): int

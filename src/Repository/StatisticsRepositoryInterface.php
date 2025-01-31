@@ -8,4 +8,6 @@ interface StatisticsRepositoryInterface
 {
     public function searchByFilters(StatisticFilter $filters): array;
     public function findAggregationsToFilters(StatisticFilter $filters): array;
+
+    public function findAggregations(StatisticFilter $filters, array $aggregations): array;
 }

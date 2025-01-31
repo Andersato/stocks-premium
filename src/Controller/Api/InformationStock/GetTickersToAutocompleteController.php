@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class GetTickersToAutocompleteController extends AppAbstractController
 {
@@ -23,11 +24,12 @@ final class GetTickersToAutocompleteController extends AppAbstractController
    public function __construct(
        GetTickerToAutocompleteService $getTickerToAutocompleteService,
        ValidatorInterface $validator,
-       SerializerInterface $serializer
+       SerializerInterface $serializer,
+       TranslatorInterface $translator
    )
    {
        $this->getTickerToAutocompleteService = $getTickerToAutocompleteService;
-       parent::__construct($validator, $serializer);
+       parent::__construct($validator, $serializer, $translator);
    }
 
 

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class GetInsiderOwnStockController extends AppAbstractController
 {
@@ -21,11 +22,12 @@ final class GetInsiderOwnStockController extends AppAbstractController
    public function __construct(
        GetDataGraphicsByMetricsService $dataGraphicsByMetricsService,
        ValidatorInterface $validator,
-       SerializerInterface $serializer
+       SerializerInterface $serializer,
+       TranslatorInterface $translator
    )
    {
        $this->dataGraphicsByMetricsService = $dataGraphicsByMetricsService;
-       parent::__construct($validator, $serializer);
+       parent::__construct($validator, $serializer, $translator);
    }
 
 

@@ -8,6 +8,7 @@ namespace App\Repository;
 use App\Constant\ElasticsearchConstants;
 use App\Model\InformationStock\ParamsElasticSearch;
 use App\Model\InformationStock\QueryBuilder;
+use App\Repository\Filters\Aggregations\GetAggregations;
 use App\Repository\Filters\Statistics\StatisticFilter;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
@@ -178,6 +179,40 @@ final class StatisticsRepository implements StatisticsRepositoryInterface
 
         if (!empty($filters->getSector())) {
             $query->aggregationIntoAggregation(ElasticsearchConstants::AGGS_SECTOR, ElasticsearchConstants::AGGS_INDUSTRY, ParamsElasticSearch::TERMS, ElasticsearchConstants::FIELD_INDUSTRY, [ParamsElasticSearch::SIZE => 50]);
+        }
+
+        $params = [
+            'index' => ElasticsearchConstants::INDEX_NAME,
+            'body' => $query->build()
+        ];
+
+        $response = $this->client->search($params)->asArray();
+
+        return $response['aggregations'];
+    }
+
+    /**
+     * @throws ServerResponseException
+     * @throws ClientResponseException
+     */
+    public function findAggregations(StatisticFilter $filters, array $aggregations): array
+    {
+        $queries = $filters->getQueriesToElastic();
+
+        $query = new QueryBuilder();
+
+        $query->bool(ParamsElasticSearch::MUST, $queries);
+        $query->size(0);
+
+        $aggregations = GetAggregations::get($aggregations);
+
+        foreach ($aggregations as $aggregation) {
+            $query->aggregation(
+                name: $aggregation['name'],
+                type: $aggregation['type'],
+                field: $aggregation['field'],
+                options: $aggregation['options']
+            );
         }
 
         $params = [

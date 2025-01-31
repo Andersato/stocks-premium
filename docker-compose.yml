@@ -11,7 +11,7 @@ services:
         XDEBUG_CLIENT_HOST: ${XDEBUG_CLIENT_HOST}
         XDEBUG_CLIENT_PORT: ${XDEBUG_CLIENT_PORT}
         XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY}
-      dockerfile: ./etc/docker/Dockerfile
+      dockerfile: ../../stocks-premiums/back-users/etc/docker/Dockerfile
     dns:
       - 8.8.8.8
       - 8.8.4.4
@@ -68,7 +68,7 @@ services:
       - "bootstrap.memory_lock=true"
       - "discovery.type=single-node"
       - "TAKE_FILE_OWNERSHIP=1"
-      - "xpack.security.enabled=false"
+      - "xpack.security.enabled=true"
       - "network.host=0.0.0.0"
     ulimits:
       memlock:
