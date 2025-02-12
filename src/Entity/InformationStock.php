@@ -264,6 +264,15 @@ class InformationStock
     #[ORM\Column(nullable: true)]
     private ?float $priceLow = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $ma10 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $ma20 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $ma50 = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -1249,5 +1258,35 @@ class InformationStock
         $this->priceLow = $priceLow;
 
         return $this;
+    }
+
+    public function getMa10(): ?float
+    {
+        return $this->ma10;
+    }
+
+    public function setMa10(?float $ma10): void
+    {
+        $this->ma10 = $ma10;
+    }
+
+    public function getMa20(): ?float
+    {
+        return $this->ma20;
+    }
+
+    public function setMa20(?float $ma20): void
+    {
+        $this->ma20 = $ma20;
+    }
+
+    public function getMa50(): ?float
+    {
+        return $this->ma50;
+    }
+
+    public function setMa50(?float $ma50): void
+    {
+        $this->ma50 = $ma50;
     }
 }

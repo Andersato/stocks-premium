@@ -18,6 +18,14 @@ framework:
     php_errors:
         log: true
 
+    http_client:
+        scoped_clients:
+            tiingo.client:
+                base_uri: '%env(URL_API_TIINGO)%'
+                headers:
+                    Content-Type: 'application/json'
+                    Authorization: 'Token %env(TOKEN_API_TIINGO)%'
+
 when@test:
     framework:
         test: true

@@ -256,4 +256,51 @@ class InformationStockRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
+    public function findDistinctStocksWithoutHighAndLowPrice(): array
+    {
+        $qb = $this->createQueryBuilder('informationStock')
+            ->select('DISTINCT stock.ticker')
+            ->join('informationStock.stock', 'stock')
+            ->where('informationStock.priceHigh is null')
+            ->setMaxResults(50);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function findByTickerAndCreatedAt(string $ticker, string $createdAt): ?InformationStock
+    {
+        $qb = $this->createQueryBuilder('informationStock')
+            ->join('informationStock.stock', 'stock')
+            ->where('informationStock.createdAt = :createdAt')
+            ->andWhere('stock.ticker = :ticker')
+            ->setParameter('createdAt', $createdAt)
+            ->setParameter('ticker', $ticker)
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findByTickerAndDateToApplySplit(string $ticker, string $dateSplit): array
+    {
+        $qb = $this->createQueryBuilder('informationStock')
+            ->join('informationStock.stock', 'stock')
+            ->where('stock.ticker = :ticker')
+            ->andWhere('informationStock.createdAt < :dateSplit')
+            ->setParameter('ticker', $ticker)
+            ->setParameter('dateSplit', $dateSplit);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByAllInformationStockToExtraData(string $ticker): array
+    {
+        $qb = $this->createQueryBuilder('informationStock')
+            ->join('informationStock.stock', 'stock')
+            ->where('stock.ticker = :ticker')
+            ->setParameter('ticker', $ticker)
+            ->orderBy('informationStock.createdAt', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
 }
